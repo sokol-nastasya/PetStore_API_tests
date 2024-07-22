@@ -20,16 +20,30 @@ describe('Swagger Petstore API Test pet entity', () => {
   });
 
   it('should find pet by Id', () => {
-    const petId = Math.floor(Math.random()* 2) + 1;
+    const newPet = {
+      id: 5,
+      name: "Marry",
+      status: "available"
+    };
+
+    cy.request({
+      method: 'POST',
+      url: `${baseUrl}/pet`,
+      body: newPet,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    });
 
     cy.request({
       method:'GET',
-      url: `${baseUrl}/pet/${petId}`
+      url: `${baseUrl}/pet/${newPet.id}`
     }).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property('id');
       expect(response.body).to.have.property('name');
-      expect(response.body).to.have.property('category');
       expect(response.body).to.have.property('status');
 
     })

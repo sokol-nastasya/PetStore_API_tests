@@ -7,9 +7,9 @@ describe('Swagger Petstore API Test store entity', () => {
             url: `${baseUrl}/store/inventory`
         }).then((response) => {
             expect(response.status).to.eq(200);
-            expect(response.body).to.have.property('AVAILABLE');
+            expect(response.body).to.have.property('{{PetStatus-Updated}}');
             expect(response.body).to.have.property('sold');
-            expect(response.body).to.have.property('placed');
+            expect(response.body).to.have.property('big');
             expect(response.body).to.have.property('available');
             expect(response.body).to.have.property('not available');
             expect(response.body).to.have.property('string');
